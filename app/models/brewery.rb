@@ -8,7 +8,7 @@ class Brewery < ActiveRecord::Base
   end
 
   def restart
-    year = 2015
-    puts "changed year to #{year}"
+    self.year = 2015
+    puts "changed year to #{self.year}"
   end
 end
