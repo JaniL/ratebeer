@@ -6,7 +6,19 @@
 
 <ul>
   <% @ratings.each do |rating| %>
+      <% if !rating.beer.nil? %>
       <li> <%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+      <% end %>
+  <% end %>
+</ul>
+
+Orphans:
+
+<ul>
+  <% @ratings.each do |rating| %>
+      <% if rating.beer.nil? %>
+          <li> orphan <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+      <% end %>
   <% end %>
 </ul>
 
