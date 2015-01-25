@@ -3,7 +3,26 @@
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
+
+  </br>
+  <strong>Amount of ratings:</strong>
+  <%= @user.ratings.size %>
+
+  </br>
+  <strong>Average of ratings:</strong>
+  <%= @user.average_rating %>
+
+  </br>
+  <strong>List of ratings:</strong>
+    <ul>
+      <% @user.ratings.each do |rating| %>
+          <% if !rating.beer.nil? %>
+              <li> <%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+          <% end %>
+      <% end %>
+    </ul>
 </p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
