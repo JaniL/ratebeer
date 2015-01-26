@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :beer_clubs
+
+  patch '/beer_clubs/join/:id', to: 'beer_clubs#join', as: 'join_beer_club'
+  patch '/beer_clubs/leave/:id', to: 'beer_clubs#leave', as: 'leave_beer_club'
+
   resources :users
 
   get 'ratings/index'

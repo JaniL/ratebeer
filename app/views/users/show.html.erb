@@ -21,6 +21,16 @@
           <% end %>
       <% end %>
     </ul>
+
+    </br>
+    <% if not @user.memberships.empty? %>
+    <strong>Member of:</strong>
+    <ul>
+    <% @user.beer_clubs.each do |club| %>
+        <li><%= link_to club.name, beer_club_path(club) %></li>
+    <% end %>
+    </ul>
+    <% end %>
 </p>
 
 
