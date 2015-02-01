@@ -40,6 +40,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    if @user != current_user
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'Access denied.' }
+        format.json { head :no_content }
+      end
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -54,6 +61,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    if @user != current_user
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: 'Access denied.' }
+        format.json { head :no_content }
+      end
+    end
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
