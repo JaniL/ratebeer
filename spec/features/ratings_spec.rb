@@ -25,4 +25,21 @@ describe "Rating" do
     expect(beer1.ratings.count).to eq(1)
     expect(beer1.average_rating).to eq(15.0)
   end
+
+  describe "when listing ratings" do
+    it "includes amount of ratings" do
+      b1 = FactoryGirl.create(:beer, name: "Brooklyn")
+      b2 = FactoryGirl.create(:beer, name: "Muumi")
+
+      b1.ratings.create score: 20
+      b2.ratings.create score: 10
+
+
+      visit ratings_path
+
+      expect(page).to have_content "Brooklyn"
+      expect(page).to have_content "Muumi"
+      expect(page).to have_content "Number of ratings: #{Rating.count}"
+    end
+  end
 end
