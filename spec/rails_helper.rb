@@ -47,4 +47,13 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  #include OwnTestHelper
+end
+
+def sign_in(credentials)
+  visit signin_path
+  fill_in('username', with:credentials[:username])
+  fill_in('password', with:credentials[:password])
+  click_button('Log in')
 end
