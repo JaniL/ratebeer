@@ -12,5 +12,5 @@ class User < ActiveRecord::Base
   has_secure_password
 
   validates :password, length: { minimum: 4}
-  validates_format_of :password, :with => /[A-Z\d]/, message: "doesn't contain at least one uppercase character and/or a number."
+  validates_format_of :password, :with => /.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*/, message: "doesn't contain at least one uppercase character and/or a number."
 end
