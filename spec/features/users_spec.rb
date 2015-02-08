@@ -40,4 +40,30 @@ describe "User" do
       click_button('Create User')
     }.to change{User.count}.by(1)
   end
+
+  describe "when rendering user profile" do
+    it "shows user's favorite brewery" do
+      brewery = FactoryGirl.create(:brewery)
+      beer = FactoryGirl.create(:beer, brewery: brewery)
+
+      beer.ratings.create score: 5, user: User.first
+
+      visit user_path User.first
+
+      expect(page).to have_content "Favorite brewery: "
+      expect(page).to have_content brewery.name
+    end
+
+    it "shows user's favorite brewery" do
+      brewery = FactoryGirl.create(:brewery)
+      beer = FactoryGirl.create(:beer, brewery: brewery)
+
+      beer.ratings.create score: 5, user: User.first
+
+      visit user_path User.first
+
+      expect(page).to have_content "Favorite style: "
+      expect(page).to have_content beer.style
+    end
+  end
 end

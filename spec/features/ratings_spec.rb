@@ -42,4 +42,25 @@ describe "Rating" do
       expect(page).to have_content "Number of ratings: #{Rating.count}"
     end
   end
+
+  describe "when listing user's ratings" do
+    it "lists user's ratings" do
+      user.ratings.create beer: beer1, score: 2
+      user.ratings.create beer: beer2, score: 40
+
+      visit user_path user
+
+      expect(page).to have_content beer1.name
+      expect(page).to have_content beer2.name
+
+    end
+
+    it "doesn't list other users/orphan ratings" do
+      Rating.create beer: beer1, score: 5
+
+      visit user_path user
+
+      expect(page).not_to have_content beer1.name
+    end
+  end
 end
