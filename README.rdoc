@@ -1,3 +1,0 @@
-# Web-ohjelmointi Ruby On Rails Kevät 2015
-
-http://janluunbisseappi.herokuapp.com/
