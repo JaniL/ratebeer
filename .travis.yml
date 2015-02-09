@@ -13,5 +13,8 @@ deploy:
   app: janluunbisseappi
   on:
     repo: JaniL/ratebeer
+  addons:
+    code_climate:
+      repo_token: 466d823637217a45bfde76b35889ed4afa93bc57896a18c22336e06d61572fc9
   run:
     - "rake db:migrate"
