@@ -71,4 +71,6 @@ end
 
 gem "codeclimate-test-reporter", group: :test, require: nil
 
+gem 'httparty'
+
 ruby '2.2.0'
