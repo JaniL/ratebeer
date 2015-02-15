@@ -5,6 +5,10 @@ FactoryGirl.define do
     password_confirmation "M01Arto"
   end
 
+  factory :style do
+    name "lowalcohol"
+  end
+
   factory :rating do
     score 10
   end
@@ -21,6 +25,6 @@ FactoryGirl.define do
   factory :beer do
     name "anonymous"
     brewery
-    style "Lager"
+    style
   end
 end

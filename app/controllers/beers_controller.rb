@@ -23,7 +23,6 @@ class BeersController < ApplicationController
 
   # GET /beers/1/edit
   def edit
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
   end
 
   # POST /beers
@@ -74,6 +73,6 @@ class BeersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def beer_params
-      params.require(:beer).permit(:name, :style, :brewery_id)
+      params.require(:beer).permit(:name, :style, :style_id, :brewery_id)
     end
 end

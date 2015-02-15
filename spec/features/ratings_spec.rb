@@ -4,8 +4,9 @@ require 'rails_helper'
 
 describe "Rating" do
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
-  let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery }
-  let!(:beer2) { FactoryGirl.create :beer, name:"Karhu", brewery:brewery }
+  let!(:style) { FactoryGirl.create :style}
+  let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery, style: style }
+  let!(:beer2) { FactoryGirl.create :beer, name:"Karhu", brewery:brewery, style: style }
   let!(:user) { FactoryGirl.create :user }
 
   before :each do
@@ -14,7 +15,7 @@ describe "Rating" do
 
   it "when given, is registered to the beer and user who is signed in" do
     visit new_rating_path
-    select('iso 3', from:'rating[beer_id]')
+    select('iso 3 (Koff)', from:'rating[beer_id]')
     fill_in('rating[score]', with:'15')
 
     expect{
@@ -28,8 +29,8 @@ describe "Rating" do
 
   describe "when listing ratings" do
     it "includes amount of ratings" do
-      b1 = FactoryGirl.create(:beer, name: "Brooklyn")
-      b2 = FactoryGirl.create(:beer, name: "Muumi")
+      b1 = FactoryGirl.create(:beer, name: "Brooklyn", style: style)
+      b2 = FactoryGirl.create(:beer, name: "Muumi", style: style)
 
       b1.ratings.create score: 20
       b2.ratings.create score: 10
