@@ -30,6 +30,17 @@
 </p>
 <% end %>
 
+<% if not current_user.nil? %>
+    <P>
+    <% if @beer_club.members.include? current_user %>
+        <td><%= link_to 'Leave', leave_beer_club_path(@beer_club), method: :patch %></td>
+    <% else %>
+        <td><%= link_to 'Join', join_beer_club_path(@beer_club), method: :patch %></td>
+    <% end %>
+    </P>
+<% end %>
+
+
 
 
 <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
