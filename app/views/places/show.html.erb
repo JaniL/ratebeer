@@ -1,0 +1,29 @@
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ol3/3.2.1/ol.min.js"></script>
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= @bar.name %></h1>
+
+<p>
+  <%= @bar.street %>
+</p>
+
+<p>
+  <%= @bar.zip %> <%= @bar.city %>
+</p>
+
+<div id="map" class="map" style="width:250px;height:250px"></div>
+<script type="text/javascript">
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.MapQuest({ layer: 'osm' })
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.transform([<%= @coordinates["lng"] %>,<%= @coordinates["lat"] %>], 'EPSG:4326', 'EPSG:3857'),
+            zoom: 15
+        })
+    });
+</script>

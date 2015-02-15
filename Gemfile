@@ -74,4 +74,6 @@ gem "codeclimate-test-reporter", group: :test, require: nil
 
 gem 'httparty'
 
+gem 'geocoder'
+
 ruby '2.2.0'
