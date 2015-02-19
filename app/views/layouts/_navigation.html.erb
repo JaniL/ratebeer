@@ -1,0 +1,43 @@
+<%# navigation styled for Bootstrap 3.0 %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'breweries', breweries_path, class: 'navbar-brand' %></li>
+        <li><%= link_to 'beers', beers_path, class: 'navbar-brand' %></li>
+        <li><%= link_to 'users', users_path, class: 'navbar-brand' %></li>
+        <li><%= link_to 'places', places_path, class: 'navbar-brand' %></li>
+
+        <% if not current_user.nil? %>
+            <li><%= link_to 'ratings', ratings_path, class: 'navbar-brand' %></li>
+            <li><%= link_to 'join a club', beer_clubs_path, class: 'navbar-brand' %></li>
+        <% end %>
+
+        <% if current_user.nil? %>
+            <li><%= link_to 'login', signin_path, class: 'navbar-brand' %></li>
+            <li><%= link_to 'signup', signup_path, class: 'navbar-brand' %></li>
+        <% else %>
+            <li><%= link_to 'logout', signout_path, method: :delete, class: 'navbar-brand' %></li>
+        <% end %>
+      </ul>
+
+      <% if not current_user.nil? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>logged in now: <%= current_user.username %></a></li>
+          </ul>
+      <% end %>
+
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= render 'layouts/navigation_links' %>
+      </ul>
+    </div>
+  </div>
+</nav>
