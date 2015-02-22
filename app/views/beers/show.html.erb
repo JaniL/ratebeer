@@ -31,9 +31,8 @@
         <%= f.submit %>
     <% end %>
 
-    <%= link_to 'Edit', edit_beer_path(@beer) %>
 
 <% end %>
 
-<%= link_to 'Edit', edit_beer_path(@beer) %> |
-<%= link_to 'Back', beers_path %>
+<%= link_to 'Edit', edit_beer_path(@beer), class:'btn btn-primary' %> |
+<%= link_to 'Back', beers_path, class:'btn btn-primary' %>
