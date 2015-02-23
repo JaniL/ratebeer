@@ -4,22 +4,38 @@
 
 <p> Number of ratings: <%= @ratings.count %> </p>
 
+
+<%= render 'list', ratings: @ratings %>
+
+<h2>Orphans:</h2>
+
+<%= render 'list', ratings: @orphans %>
+
+
+<h2>Most rated</h2>
+
 <ul>
-  <% @ratings.each do |rating| %>
-      <% if !rating.beer.nil? %>
-      <li> <%= rating %> <% if not rating.user.nil? %> <%= link_to rating.user.username, rating.user %> <% end %> <% if rating.user == current_user %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </li>
-      <% end %>
+  <% @mostRated.each do |b| %>
+      <li><%= link_to b.name + " (rating " + b.average_rating.to_s + ")", b %></li>
   <% end %>
 </ul>
 
-Orphans:
+<h2>Users with most ratings</h2>
 
 <ul>
-  <% @ratings.each do |rating| %>
-      <% if rating.beer.nil? %>
-          <li> orphan <% if rating.user == current_user %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </li>
-      <% end %>
+  <% @mostRatings.each do |u| %>
+      <li><%= link_to u.username + " (" + u.ratings.size.to_s + " ratings)", u %></li>
   <% end %>
 </ul>
+
+<h2>Five latest ratings</h2>
+
+<ul>
+  <% @latestRatings.each do |r| %>
+      <li><%= link_to r.user.username + " rated " + r.beer.name, r.beer %></li>
+  <% end %>
+</ul>
+
+
 
 <%= link_to 'New Rating', ratings_new_path, class:'btn btn-primary' %>

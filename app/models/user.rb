@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 
+  scope :mostRatings, -> { all().sort_by{|u| u.ratings.size}.reverse.take(3) }
+
   has_secure_password
 
   validates :password, length: { minimum: 4}

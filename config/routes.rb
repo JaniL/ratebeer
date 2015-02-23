@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   patch '/beer_clubs/join/:id', to: 'beer_clubs#join', as: 'join_beer_club'
   patch '/beer_clubs/leave/:id', to: 'beer_clubs#leave', as: 'leave_beer_club'
 
+  patch '/users/ban/:id', to: 'users#ban', as: 'ban_user'
+  patch '/users/unban/:id', to: 'users#unban', as: 'unban_user'
+
   resources :users
 
   get 'ratings/index'
@@ -34,6 +37,10 @@ Rails.application.routes.draw do
 
   resources :places, only:[:index, :show]
   post 'places', to:'places#search'
+
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

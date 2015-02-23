@@ -1,0 +1,7 @@
+<ul>
+<% ratings.each do |rating| %>
+    <% if !rating.beer.nil? %>
+        <li> <%= rating %> <% if not rating.user.nil? %> <%= link_to rating.user.username, rating.user %> <% end %> <% if rating.user == current_user %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> <% end %> </li>
+    <% end %>
+<% end %>
+</ul>

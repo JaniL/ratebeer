@@ -1,6 +1,10 @@
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.all
+    @ratings = Rating.where("beer_id is not NULL")
+    @orphans = Rating.where("beer_id is null")
+    @mostRated = Beer.mostRated
+    @mostRatings = User.mostRatings
+    @latestRatings = Rating.recent
   end
 
   def new

@@ -51,6 +51,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def ban
+    @user.ban = true
+    redirect_to :back, notice: "User banned."
+  end
+
+  def unban
+    @user.ban = false
+    redirect_to :back, notice: "User unbanned."
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

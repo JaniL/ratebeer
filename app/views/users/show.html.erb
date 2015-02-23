@@ -41,6 +41,14 @@
     <% end %>
 </p>
 
+<% if current_user and current_user.admin == true %>
+    <% if @user.ban is false %>
+        <%= link_to 'Ban', ban_user_path(@user), class:'btn btn-primary' %>
+    <% else %>
+        <%= link_to 'UnBan', unban_user_path(@user), class:'btn btn-primary' %>
+    <% end %>
+<% end %>
+
 
 <% if current_user == @user %>
 <%= link_to 'Edit', edit_user_path(@user), class:'btn btn-primary' %> |

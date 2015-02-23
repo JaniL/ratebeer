@@ -9,6 +9,10 @@ class Brewery < ActiveRecord::Base
   validate :year_cannot_be_in_the_future
   validate :year_cannot_be_so_old_pls
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
+  scope :mostRated, -> { all().sort_by{|b| b.average_rating}.reverse().take(5) }
+
   def year_cannot_be_in_the_future
     if year > Time.now.year
       errors.add(:year, "can't be in the future")
