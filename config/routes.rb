@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
 
+  get 'beerlist', to:'beers#list'
+
+  get 'ngbeerlist', to:'beers#nglist'
+  get 'brewerylist', to:'breweries#nglist'
+
   resources :ratings, only: [:index, :new, :create, :destroy]
 
   resource :session, only: [:new, :create, :delete]

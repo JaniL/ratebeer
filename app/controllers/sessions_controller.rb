@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by username: params[:username]
 
     if user && user.authenticate(params[:password])
-      if user.ban is true
+      if user.ban == true
         redirect_to :back, notice: "You are banned. Contact admin."
       end
       session[:user_id] = user.id

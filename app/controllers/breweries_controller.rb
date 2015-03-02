@@ -1,6 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :nglist]
   before_action :ensure_that_is_admin, only: [:remove]
 
 
@@ -8,13 +8,34 @@ class BreweriesController < ApplicationController
   # GET /breweries
   # GET /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    @order = params[:order] || 'name'
+
+    @active_breweries = case @order
+                          when 'name' then @active_breweries.sort_by{ |b| b.name }
+                          when 'rname' then @active_breweries.sort_by{ |b| b.name }.reverse
+                          when 'year' then @active_breweries.sort_by{ |b| b.year }
+                          when 'ryear' then @active_breweries.sort_by{ |b| b.year }.reverse
+                        end if @active_breweries.nil? == false
+
+    @retired_breweries = case @order
+                           when 'name' then @retired_breweries.sort_by{ |b| b.name }
+                           when 'rname' then @retired_breweries.sort_by{ |b| b.name }.reverse
+                           when 'year' then @retired_breweries.sort_by{ |b| b.year }
+                           when 'ryear' then @retired_breweries.sort_by{ |b| b.year }.reverse
+                        end if @retired_breweries.nil? == false
   end
 
   # GET /breweries/1
   # GET /breweries/1.json
   def show
+  end
+
+  def nglist
+
   end
 
   # GET /breweries/new

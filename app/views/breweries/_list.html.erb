@@ -1,8 +1,22 @@
 <table class="table table-hover">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Year</th>
+    <th>
+      <% if @order == 'name' %>
+          <%= link_to 'Name', controller: 'breweries', order: 'rname' %>
+
+      <% else %>
+          <%= link_to 'Name', controller: 'breweries', order: 'name' %>
+      <% end %>
+
+    </th>
+    <th>
+      <% if @order == 'year' %>
+      <%= link_to 'Year', controller: 'breweries', order: 'ryear' %>
+      <% else %>
+          <%= link_to 'Year', controller: 'breweries', order: 'year' %>
+      <% end %>
+    </th>
   </tr>
   </thead>
 

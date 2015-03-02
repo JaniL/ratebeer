@@ -76,6 +76,8 @@ gem 'httparty'
 
 gem 'geocoder'
 
+gem 'jquery-turbolinks'
+
 gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
