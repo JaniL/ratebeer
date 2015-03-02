@@ -46,6 +46,7 @@ class BreweriesController < ApplicationController
 
   # GET /breweries/1/edit
   def edit
+    expire_fragment('brewery-' + @brewery.id)
     expireBrewery
   end
 
@@ -70,6 +71,7 @@ class BreweriesController < ApplicationController
   # PATCH/PUT /breweries/1.json
   def update
     expireBrewery
+    expire_fragment('brewery-' + @brewery.id)
     respond_to do |format|
       if @brewery.update(brewery_params)
         format.html { redirect_to @brewery, notice: 'Brewery was successfully updated.' }
@@ -88,6 +90,7 @@ class BreweriesController < ApplicationController
     new_status = brewery.active? ? "active" : "retired"
 
     expireBrewery
+    expire_fragment('brewery-' + @brewery.id)
 
     redirect_to :back, notice:"brewery activity status changed to #{new_status}"
   end
@@ -95,6 +98,7 @@ class BreweriesController < ApplicationController
   # DELETE /breweries/1
   # DELETE /breweries/1.json
   def destroy
+    expire_fragment('brewery-' + @brewery.id)
     @brewery.destroy
     expireBrewery
     respond_to do |format|
