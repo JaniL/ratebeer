@@ -41,10 +41,12 @@ class BreweriesController < ApplicationController
   # GET /breweries/new
   def new
     @brewery = Brewery.new
+    expireBrewery
   end
 
   # GET /breweries/1/edit
   def edit
+    expireBrewery
   end
 
   # POST /breweries
@@ -52,6 +54,7 @@ class BreweriesController < ApplicationController
   def create
     @brewery = Brewery.new(brewery_params)
 
+    expireBrewery
     respond_to do |format|
       if @brewery.save
         format.html { redirect_to @brewery, notice: 'Brewery was successfully created.' }
@@ -66,6 +69,7 @@ class BreweriesController < ApplicationController
   # PATCH/PUT /breweries/1
   # PATCH/PUT /breweries/1.json
   def update
+    expireBrewery
     respond_to do |format|
       if @brewery.update(brewery_params)
         format.html { redirect_to @brewery, notice: 'Brewery was successfully updated.' }
@@ -83,6 +87,8 @@ class BreweriesController < ApplicationController
 
     new_status = brewery.active? ? "active" : "retired"
 
+    expireBrewery
+
     redirect_to :back, notice:"brewery activity status changed to #{new_status}"
   end
 
@@ -90,10 +96,15 @@ class BreweriesController < ApplicationController
   # DELETE /breweries/1.json
   def destroy
     @brewery.destroy
+    expireBrewery
     respond_to do |format|
       format.html { redirect_to breweries_url, notice: 'Brewery was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def expireBrewery
+    ["brewerylist-name", "brewerylist-year"].each { |f| expire_fragment(f) }
   end
 
   private
