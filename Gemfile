@@ -63,6 +63,8 @@ group :test do
   gem 'database_cleaner'
 end
 
+gem 'rack-mini-profiler'
+
 group :development, :test do
   gem 'sqlite3'
 end
